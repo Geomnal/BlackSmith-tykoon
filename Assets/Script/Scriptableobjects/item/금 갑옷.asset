@@ -16,7 +16,7 @@ MonoBehaviour:
   successRate: 21
   requiredIron: 6
   requiredWood: 0
-  requiredGolds: 1
+  requiredGolds: 0
   requiredTungsten: 0
   item_count: 0
   sprite: {fileID: 21300000, guid: 79fa475097424ce4d9a442268765262d, type: 3}

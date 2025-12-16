@@ -12,6 +12,7 @@ public class PlayerManager : MonoBehaviour
     public int gold = 1500;
     public int morality = 50;
     public int Playerlevel = 1;
+    public int score = 0;
 
     public float bgmVolume = 1f; // 브금 볼륨 (0~1)
 
@@ -26,6 +27,9 @@ public class PlayerManager : MonoBehaviour
 
     public hammerdata hammerdata;
     public invenmanager invenmanager;
+
+
+    public ScoreDisplay scoreDisplay; // ScoreDisplay 컴포넌트 참조
 
     private void Awake()
     {
@@ -51,6 +55,7 @@ public class PlayerManager : MonoBehaviour
         UpdatebrokenswordUI();
         
         Leveluptrigger();
+        NetworkManager.Instance.Initialize();
 
     }
     private void Update()
@@ -153,6 +158,12 @@ public class PlayerManager : MonoBehaviour
             {
                 Weapon_in_invenmanager(itemdata); // itemdata를 이용하여 성공 처리
                 Debug.Log($"{itemdata.itemname} 제작 성공!");
+                int scoreIncrease = 50; // 증가시킬 점수량 정의
+
+                // 1. 서버에 '50점을 더해달라'고 요청
+                NetworkManager.Instance.SendScoreAdd(scoreIncrease);
+
+
                 if (uimanager != null)
                 {
                     uimanager.WeaponMadeend.SetActive(true);
