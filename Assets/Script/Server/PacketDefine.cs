@@ -7,45 +7,52 @@ using System.Threading.Tasks;
 namespace CSBaseLib
 {
     // 0 ~ 9999
-    public enum ERROR_CODE : short
+    public enum ErrorCode : short
     {
-        NONE                        = 0, // 에러가 아니다
+        NONE = 0,
 
         // 서버 초기화 에라
-        REDIS_INIT_FAIL             = 1,    // Redis 초기화 에러
+        REDIS_INIT_FAIL = 1,    // Redis 초기화 에러
 
         // 로그인 
-        LOGIN_INVALID_AUTHTOKEN             = 1001, // 로그인 실패: 잘못된 인증 토큰
-        ADD_USER_DUPLICATION                = 1002,
-        REMOVE_USER_SEARCH_FAILURE_USER_ID  = 1003,
-        USER_AUTH_SEARCH_FAILURE_USER_ID    = 1004,
-        USER_AUTH_ALREADY_SET_AUTH          = 1005,
+        LOGIN_FAILED = 1001,
+        DB_ERROR = 1002,
+        REMOVE_USER_SEARCH_FAILURE_USER_ID = 1003,
+        USER_AUTH_SEARCH_FAILURE_USER_ID = 1004,
+        USER_AUTH_ALREADY_SET_AUTH = 1005,
         LOGIN_ALREADY_WORKING = 1006,
         LOGIN_FULL_USER_COUNT = 1007,
 
-        DB_LOGIN_INVALID_PASSWORD   = 1011,
-        DB_LOGIN_EMPTY_USER         = 1012,
-        DB_LOGIN_EXCEPTION          = 1013,
+        DB_LOGIN_INVALID_PASSWORD = 1011,
+        DB_LOGIN_EMPTY_USER = 1012,
+        DB_LOGIN_EXCEPTION = 1013,
 
         ROOM_ENTER_INVALID_STATE = 1021,
         ROOM_ENTER_INVALID_USER = 1022,
         ROOM_ENTER_ERROR_SYSTEM = 1023,
         ROOM_ENTER_INVALID_ROOM_NUMBER = 1024,
         ROOM_ENTER_FAIL_ADD_USER = 1025,
+
+
+
+        CREATE_FAIL_DUPLICATE = 2001, // 이미 존재하는 아이디
     }
 
     // 1 ~ 10000
-    public enum PACKETID : int
+    public enum PacketId : int
     {
         REQ_RES_TEST_ECHO = 101,
-        
-               
-        // 클라이언트
-        CS_BEGIN        = 1001,
 
-        REQ_LOGIN       = 1002,
-        RES_LOGIN       = 1003,
-        NTF_MUST_CLOSE       = 1005,
+
+        // 클라이언트
+        CS_BEGIN = 1001,
+
+        REQ_LOGIN = 1002,
+        RES_LOGIN = 1003,
+        NTF_MUST_CLOSE = 1005,
+
+        REQ_CREATE_ACCOUNT = 1008,
+        RES_CREATE_ACCOUNT = 1009,
 
         REQ_ROOM_ENTER = 1015,
         RES_ROOM_ENTER = 1016,
@@ -78,18 +85,30 @@ namespace CSBaseLib
         REQ_USER_SEARCH = 1101,
         RES_USER_SEARCH = 1102,
 
-        REQ_USER_SCORE_UPDATE = 1103, // 새로운 ID 값
-        RES_USER_SCORE_UPDATE = 1104, // 새로운 ID 값
-        REQ_USER_SCORE_GET = 1107, // 새로운 ID 값
-        RES_USER_SCORE_GET = 1108, // 새로운 ID 값
-        REQ_USER_SCORE_ADD = 1109,
+        REQ_USER_SCORE_UPDATE = 1103,
+        RES_USER_SCORE_UPDATE = 1104,
+
+        REQ_USER_RANKING_LIST = 1105,
+        RES_USER_RANKING_LIST = 1106,
+        REQ_USER_SCORE_GET = 1107, // [추가됨] 점수 조회 요청
+        RES_USER_SCORE_GET = 1108,
+        REQ_USER_SCORE_ADD = 1109,    // 점수 획득 (Redis Ranking)
         RES_USER_SCORE_ADD = 1110,
 
-        CS_END          = 1200,
+        REQ_CHANGE_PASSWORD = 1121,
+        RES_CHANGE_PASSWORD = 1122,
+
+        // 계정 탈퇴 요청 및 응답
+        REQ_DELETE_ACCOUNT = 1123,
+        RES_DELETE_ACCOUNT = 1124,
+
+        RES_UPDATE_USER_INFO =1125,
+
+        CS_END = 1200,
 
 
         // 시스템, 서버 - 서버
-        SS_START    = 8001,
+        SS_START = 8001,
 
         NTF_IN_CONNECT_CLIENT = 8011,
         NTF_IN_DISCONNECT_CLIENT = 8012,

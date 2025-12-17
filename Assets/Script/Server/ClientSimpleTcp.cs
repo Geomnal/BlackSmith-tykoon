@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Net.Sockets;
 using System.Net;
+#if UNITY_EDITOR
 using UnityEditor.XR;
+#endif
+
 
 namespace ChatClient2
 {

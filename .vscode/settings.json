@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "BlackSmith-tykoon.sln"
+    "dotnet.defaultSolution": "BlackSmithtykoon.sln"
 }

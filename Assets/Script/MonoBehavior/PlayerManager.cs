@@ -9,6 +9,7 @@ public class PlayerManager : MonoBehaviour
     private UIManager uimanager;
     public int brokenSword = 0;
     public int reputation = 0;
+    public string UserID;
     public int gold = 1500;
     public int morality = 50;
     public int Playerlevel = 1;
@@ -160,8 +161,8 @@ public class PlayerManager : MonoBehaviour
                 Debug.Log($"{itemdata.itemname} 제작 성공!");
                 int scoreIncrease = 50; // 증가시킬 점수량 정의
 
-                // 1. 서버에 '50점을 더해달라'고 요청
-                NetworkManager.Instance.SendScoreAdd(scoreIncrease);
+                string myUserId = this.UserID; // 로그인한 유저 ID
+                NetworkManager.Instance.SendScoreAdd(150);
 
 
                 if (uimanager != null)
